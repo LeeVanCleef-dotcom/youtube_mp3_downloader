@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+import sys
 import urllib.request
 import urllib.parse
 import re
@@ -41,12 +43,17 @@ def get_song_url(song_name):
 
 
 if __name__ == '__main__':
-    # filePath: path of songs containing .txt file
-    filePath = r''
+    filePath = sys.argv[1]
+    fileContent = sys.argv[2]
 
     songs = load_songs(filePath)
     songs = list(map(lambda song: song.replace('\n', ''), songs))
 
-    song_urls = get_urls(songs)
+    if fileContent == "songs":
+        songUrls = get_urls(songs)
+    elif fileContent == "urls":
+        songUrls = songs
+    else:
+        raise ValueError(f"Unknown argument {fileContent}")
 
-    download_songs(song_urls)
+    download_songs(songUrls)
