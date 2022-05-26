@@ -37,9 +37,11 @@ def move_mp3s(source, destination):
 
 
 if __name__ == '__main__':
-    # sourcePath: path to the directory where your songs are downloaded (by default it is project's root directory)
-    sourcePath = sys.argv[1]
-    # destinationPath: path to where you want your songs to be moved after gibberish is removed from their name
-    destinationPath = sys.argv[2]
+    sourcePath = os.getcwd()
+    try:
+        # destinationPath: path to where you want your songs to be moved after gibberish is removed from their name
+        destinationPath = sys.argv[1]
+    except IndexError:
+        destinationPath = sourcePath
 
     move_mp3s(sourcePath, destinationPath)
